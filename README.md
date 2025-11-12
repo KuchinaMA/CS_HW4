@@ -25,7 +25,7 @@
 
 
 ## Запуск программы
-1. Настройка iptables
+1. **Настройка iptables**
 
 ```
 iptables -t mangle -F
@@ -33,7 +33,7 @@ iptables -t mangle -A FORWARD -p udp --dport 53 -j NFQUEUE --queue-num 5
 iptables -t mangle -A FORWARD -p udp --sport 53 -j NFQUEUE --queue-num 5
 ```
 
-2. Создание файла правил
+2. **Создание файла с правилами**
 
 Создайте файл dns_rules.txt:
 ```
@@ -48,12 +48,12 @@ qtype == "A" pass
 qtype == "AAAA" pass
 ```
 
-3. Запуск фильтра
+3. **Запуск фильтра**
 ```
 python3 dns_filter.py --rules dns_rules.txt --queue-num 5
 ```
 
-Формат файла правил
+Формат файла правил:
 
 `поле оператор значение действие`
 
@@ -85,8 +85,7 @@ python3 dns_filter.py --rules dns_rules.txt --queue-num 5
 ```
 
 Вывод программы:
-text
-
+```
 ==================================================
 DNS Filter with NFQUEUE
 ==================================================
@@ -109,9 +108,9 @@ DNS RESPONSE: to 192.168.20.10
 
 DNS REQUEST: malicious.com (IPv4) from 192.168.20.10
 BLOCKED REQUEST: qname matches 'malicious.com'
+```
 
-Тестирование с клиента:
-bash
+**Тестирование с клиента:**
 
 Разрешенный домен - работает
 ```
